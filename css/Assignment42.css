@@ -6,12 +6,10 @@ body{
 }
 .paint{
     display: flex;
-
 }
 
 .menuSide{
-    background: black;
-    opacity: 0.65;
+    background-color: rgba(0,0,0,0.6);
     width: 13%;
     height: 100vh;
     overflow: hidden;
@@ -25,13 +23,17 @@ body{
 #image{
     background-color: white;
 }
+ul{
+    list-style: none;
+}
 
-button.color{
+.color{
     margin-left: 50px;
     margin-bottom: 30px;
     border-radius: 50%;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
+    background-color: red;
 }
 
 .toile{
@@ -40,5 +42,20 @@ button.color{
     height: 500px;
     margin: auto;
     border: 2px solid grey;
-    position: static;
+    position: relative;
+}
+.slidecontainer {
+   margin-left:30px;
+    width: 70% ;
+}
+img.gomme{
+   background-color: white;
+   width: 40px;
+   height: 45px;
+   margin-left: 90px;
+   margin-bottom: 30px;
+}
+button.static{
+    margin-left: 45px;
+
 }
