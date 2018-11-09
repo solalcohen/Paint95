@@ -16,7 +16,7 @@ body{
 }
 .menuSide img{
     width: 100%;
-    height: 170px;
+    height: 120px;
     margin-bottom: 50px;
     
 }
@@ -43,17 +43,25 @@ ul{
     margin: auto;
     border: 2px solid grey;
     position: relative;
+    display: none;
 }
 .slidecontainer {
    margin-left:30px;
     width: 70% ;
 }
-img.gomme{
-   background-color: white;
-   width: 40px;
-   height: 45px;
-   margin-left: 90px;
-   margin-bottom: 30px;
+img#gomme{
+    width: 55px;
+    height: 55px;
+    margin-left: -6px;
+}
+
+
+.btn_gomme{
+    height: 61px;
+    width: 60px;
+    margin-left: 82px;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }
 button.static{
     margin-left: 45px;

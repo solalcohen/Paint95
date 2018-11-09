@@ -6,6 +6,8 @@ Paint.selectedSize = '10';
 Paint.Start=function(){
     Paint.generateColor();
     Paint.selectSize();
+    Paint.new();
+    Paint.Erase();
 };
 
 
@@ -43,6 +45,17 @@ Paint.draw = function (event) {
     var elem = document.getElementById("demo");
     elem.appendChild(newDiv);
 }
+
+Paint.Erase=function(){
+var eraser=document.getElementById('gomme');
+eraser.addEventListener('click',function (e){
+
+    Paint.selectedColor='white';
+})
+};
+
+
+
 document.getElementById("demo").addEventListener("mousedown", function (e) {
     document.getElementById("demo").addEventListener("mousemove", Paint.draw);
 
@@ -60,6 +73,14 @@ Paint.save =function(){
 Paint.load =function(){
     alert("save");
 };
+
+Paint.new=function(){
+var newCanvas=document.getElementById('new');
+newCanvas.addEventListener('click', function(e){
+    document.getElementById('demo').style.display="block";
+})
+};
+
 
 Paint.Start();
 
