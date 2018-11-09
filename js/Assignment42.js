@@ -3,6 +3,12 @@ Paint.color = ['red', 'blue', 'green', 'yellow', 'black'];
 Paint.selectedColor = 'black';
 Paint.selectedSize = '10';
 
+Paint.Start=function(){
+    Paint.generateColor();
+    Paint.selectSize();
+};
+
+
 Paint.generateColor = function () {
     for (var i = 0; i < Paint.color.length; i++) {
         var buttonItem = document.createElement('li');
@@ -46,7 +52,17 @@ document.addEventListener("click", function (e) {
     document.getElementById("demo").removeEventListener("mousemove", Paint.draw);
 
 });
-Paint.generateColor();
-Paint.selectSize();
+
+Paint.save =function(){
+    alert("save");
+};
+
+Paint.load =function(){
+    alert("save");
+};
+
+Paint.Start();
+
+
 
 
