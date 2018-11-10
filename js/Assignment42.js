@@ -3,6 +3,7 @@ Paint.color = ['red', 'blue', 'green', 'yellow', 'black'];
 Paint.selectedColor = 'black';
 Paint.selectedSize = '10';
 
+
 Paint.Start = function () {
     Paint.generateColor();
     Paint.selectSize();
@@ -13,7 +14,6 @@ Paint.Start = function () {
     Paint.save();
     Paint.load();
 };
-
 
 Paint.generateColor = function () {
     for (var i = 0; i < Paint.color.length; i++) {
@@ -95,7 +95,10 @@ Paint.save = function () {
             toileObj['draw'].push(drawObj);
         }
         localStorage.setItem('toile', JSON.stringify(toileObj));
+        alert('Paint Saved succesfully !');
+        Paint.show();
     });
+   
 };
 
 Paint.load = function () {
@@ -116,10 +119,8 @@ Paint.load = function () {
             newDiv.style.width=currentDraw['width'];
             newDiv.style.height=currentDraw['height'];
             newDiv.style.borderRadius=currentDraw['border'];
-            newDiv.style.display='block';
             toile.appendChild(newDiv);
-
-        }
+        }alert('Paint loaded succesfully !');
     });
 };
 
