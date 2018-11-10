@@ -3,11 +3,15 @@ Paint.color = ['red', 'blue', 'green', 'yellow', 'black'];
 Paint.selectedColor = 'black';
 Paint.selectedSize = '10';
 
-Paint.Start=function(){
+Paint.Start = function () {
     Paint.generateColor();
     Paint.selectSize();
     Paint.new();
     Paint.Erase();
+    Paint.startToDraw();
+    Paint.stopToDraw();
+    Paint.save();
+    Paint.load();
 };
 
 
@@ -46,39 +50,97 @@ Paint.draw = function (event) {
     elem.appendChild(newDiv);
 }
 
-Paint.Erase=function(){
-var eraser=document.getElementById('gomme');
-eraser.addEventListener('click',function (e){
+Paint.Erase = function () {
+    var eraser = document.getElementById('gomme');
+    eraser.addEventListener('click', function (e) {
+        Paint.selectedColor = 'white';
+    })
+};
 
-    Paint.selectedColor='white';
-})
+Paint.startToDraw = function () {
+    var firstClick = document.getElementById("demo");
+    firstClick.addEventListener("mousedown", function (e) {
+        firstClick.addEventListener("mousemove", Paint.draw);
+    });
+
+};
+
+Paint.stopToDraw = function () {
+    document.addEventListener("click", function (e) {
+        document.getElementById("demo").removeEventListener("mousemove", Paint.draw);
+
+    });
+};
+
+Paint.save = function () {
+    var saveBtn = document.getElementById("Save");
+    saveBtn.addEventListener("click", function (e) {
+        var toile = document.getElementById('demo');
+        var toileLeft = toile.getBoundingClientRect().left;
+        var toileTop = toile.getBoundingClientRect().top;
+        var toileObj = {};
+        toileObj['draw'] = [];
+        var drawMade = toile.getElementsByTagName('div');
+        for (var i = 0; i < drawMade.length; i++) {
+            var currentDraw = drawMade[i];
+            var drawObj = {};
+            drawObj['color']=currentDraw.style.backgroundColor;
+            drawObj['top'] = currentDraw.getBoundingClientRect().top - toileTop;
+            drawObj['left'] = currentDraw.getBoundingClientRect().left - toileLeft;
+            drawObj['position']=currentDraw.style.position;
+            drawObj['width']=currentDraw.style.width;
+            drawObj['height']=currentDraw.style.height;
+            drawObj['border']=currentDraw.style.borderRadius;
+
+            toileObj['draw'].push(drawObj);
+        }
+        localStorage.setItem('toile', JSON.stringify(toileObj));
+    });
+};
+
+Paint.load = function () {
+    var loadBtn = document.getElementById("Load");
+    loadBtn.addEventListener("click", function (e) {
+        var loadedToile = localStorage.getItem('toile');
+        var toileObj = JSON.parse(loadedToile);
+        Paint.clear();
+        var drawMade = toileObj['draw'];
+        for (var i = 0; i < drawMade.length; i++) {
+            var currentDraw = drawMade[i];
+            var newDiv=document.createElement('div');
+            var toile=document.getElementById('demo');
+            newDiv.style.top = currentDraw['top'] + 'px';
+            newDiv.style.left = currentDraw['left'] + 'px';
+            newDiv.style.backgroundColor=currentDraw['color'];
+            newDiv.style.position=currentDraw['position'];
+            newDiv.style.width=currentDraw['width'];
+            newDiv.style.height=currentDraw['height'];
+            newDiv.style.borderRadius=currentDraw['border'];
+            newDiv.style.display='block';
+            toile.appendChild(newDiv);
+
+        }
+    });
+};
+
+Paint.new = function () {
+    var newCanvas = document.getElementById('new');
+    newCanvas.addEventListener('click', Paint.show);
+
 };
 
 
+Paint.show = function () {
+    document.getElementById('demo').style.display = "block";
+    Paint.clear();
 
-document.getElementById("demo").addEventListener("mousedown", function (e) {
-    document.getElementById("demo").addEventListener("mousemove", Paint.draw);
-
-});
-
-document.addEventListener("click", function (e) {
-    document.getElementById("demo").removeEventListener("mousemove", Paint.draw);
-
-});
-
-Paint.save =function(){
-    alert("save");
-};
-
-Paint.load =function(){
-    alert("save");
-};
-
-Paint.new=function(){
-var newCanvas=document.getElementById('new');
-newCanvas.addEventListener('click', function(e){
-    document.getElementById('demo').style.display="block";
-})
+}
+Paint.clear = function () {
+    var toile = document.getElementById('demo');
+    var drawMade = toile.getElementsByTagName('div');
+    while (drawMade.length > 0) {
+        toile.removeChild(drawMade[0]);
+    }
 };
 
 
