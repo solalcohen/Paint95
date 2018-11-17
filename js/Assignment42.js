@@ -1,5 +1,5 @@
 var Paint = {};
-Paint.color = ['red', 'blue', 'green', 'yellow', 'black'];
+Paint.color = ['red', 'blue', 'green', 'yellow', 'black','grey'];
 Paint.selectedColor = 'black';
 Paint.selectedSize = '10';
 
